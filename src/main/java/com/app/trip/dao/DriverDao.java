@@ -1,5 +1,6 @@
 package com.app.trip.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +18,11 @@ public interface DriverDao extends JpaRepository<Driver, Long> {
 	 EntityManager entityManager;*/
 	 
 
-	public Optional<Driver> findByDriverId(Long customerId);
+	public Optional<Driver> findByDriverId(Long driverId);
+
+	public Driver findByDriverName(String driverName);
+	
+	public List<Driver> findDriversByStatus(String status);
 
 	
 //	Optional<List<Driver>> findDriversByStatus(String status, Sort sort);

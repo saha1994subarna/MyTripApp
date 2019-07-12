@@ -11,6 +11,6 @@ import com.app.trip.entities.Customer;
 @Repository
 public interface BookingDao extends JpaRepository<Bookings, Long> {
 
-	public Optional<Bookings> findByBookingId(Long customerId);
+	public Optional<Bookings> findByBookingId(Long driver);
 	
 }

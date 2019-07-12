@@ -1,7 +1,6 @@
 package com.app.trip.pojos;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class DriverDetails implements Serializable{
 
@@ -13,15 +12,18 @@ public class DriverDetails implements Serializable{
 	
 	private Double longitude;
 	
+	private String status;
+	
 	public DriverDetails() {
 		
 	}
-	public DriverDetails(String name, String location, Double latitude, Double longitude) {
+	public DriverDetails(String name, String location, Double latitude, Double longitude, String status) {
 		super();
 		this.name = name;
 		this.location = location;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.status = status;
 	}
 
 	public String getName() {
@@ -54,6 +56,12 @@ public class DriverDetails implements Serializable{
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	

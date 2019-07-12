@@ -26,14 +26,11 @@ public class Customer {
 		private String location;
 		
 		@Column(name = "latitude")
-		private String latitude;
+		private Double latitude;
 		
 		@Column(name = "longitude")
-		private Long longitude;
+		private Double longitude;
 		
-		@Column(name = "status")
-		private String status;
-
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -43,11 +40,10 @@ public class Customer {
 			result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
 			result = prime * result + ((location == null) ? 0 : location.hashCode());
 			result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
-			result = prime * result + ((status == null) ? 0 : status.hashCode());
 			return result;
 		}
 
-		public Customer(Long customerId, String customerName, String location, String latitude, Long longitude,
+		public Customer(Long customerId, String customerName, String location, Double latitude, Double longitude,
 				String status) {
 			super();
 			this.customerId = customerId;
@@ -55,13 +51,13 @@ public class Customer {
 			this.location = location;
 			this.latitude = latitude;
 			this.longitude = longitude;
-			this.status = status;
+			
 		}
 
 		@Override
 		public String toString() {
 			return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", location=" + location
-					+ ", latitude=" + latitude + ", longitude=" + longitude + ", status=" + status + "]";
+					+ ", latitude=" + latitude + ", longitude=" + longitude  + "]";
 		}
 
 		@Override
@@ -98,21 +94,10 @@ public class Customer {
 					return false;
 			} else if (!longitude.equals(other.longitude))
 				return false;
-			if (status == null) {
-				if (other.status != null)
-					return false;
-			} else if (!status.equals(other.status))
-				return false;
 			return true;
 		}
 
-		public String getStatus() {
-			return status;
-		}
-
-		public void setStatus(String status) {
-			this.status = status;
-		}
+		
 
 		public Long getCustomerId() {
 			return customerId;
@@ -138,19 +123,19 @@ public class Customer {
 			this.location = location;
 		}
 
-		public String getLatitude() {
+		public Double getLatitude() {
 			return latitude;
 		}
 
-		public void setLatitude(String latitude) {
+		public void setLatitude(Double latitude) {
 			this.latitude = latitude;
 		}
 
-		public Long getLongitude() {
+		public Double getLongitude() {
 			return longitude;
 		}
 
-		public void setLongitude(Long longitude) {
+		public void setLongitude(Double longitude) {
 			this.longitude = longitude;
 		}
 		

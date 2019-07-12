@@ -11,6 +11,8 @@ import com.app.trip.entities.Customer;
 public interface CustomerDao extends JpaRepository<Customer, Long> {
 	
 		public Optional<Customer> findByCustomerId(Long customerId);
+
+		public Customer findByCustomerName(String customerName);
 		
 	
 

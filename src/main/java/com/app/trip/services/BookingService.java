@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.trip.dao.BookingDao;
+import com.app.trip.entities.Bookings;
+import com.app.trip.entities.Customer;
 import com.app.trip.entities.Driver;
 import com.app.trip.pojos.CustomerDetails;
 import com.app.trip.pojos.DriverDetails;
-import com.app.trip.responses.DriverResponse;
 
 @Service
 public class BookingService {
@@ -22,15 +23,20 @@ public class BookingService {
 
 	@Autowired
 	private BookingDao bookingDao;
+	
+	@Autowired
+	private CustomerService customerService;
 
-	public DriverResponse getNearestCab(CustomerDetails customerDetails) {
+	public DriverDetails getNearestCab(CustomerDetails customerDetails) {
 		
 		// Get the list of all drivers
 		//TO-DO: Fetch List of only Available Drivers
 		List<Driver>  drivers = new ArrayList<Driver>();
 		drivers = driverService.getAllDrivers();
+		DriverDetails driverDetails = new DriverDetails();
 		
-		DriverResponse driverDetails = new DriverResponse();	
+		//Save new customer
+		customerService.saveCustomer(customerDetails);
 		
 		Map<Driver, Double> distancesOfDrivers = new HashMap<Driver, Double>();
 		
@@ -64,6 +70,35 @@ public class BookingService {
 			}
 		}
 		return minKey;	
+	}
+
+	public void updateDriverStatus(DriverDetails driverDetails) {
+		Driver driver = new Driver();
+		
+		if(null != driverDetails) {
+		driver = driverService.findDriverIdByName(driverDetails.getName());
+		}
+			driverService.updateDriverStatus(driverDetails);
+		
+	}
+
+	public void updateBookingsData(DriverDetails driverDetails, CustomerDetails customerDetails) {
+		// TODO Auto-generated method stub
+		Driver driver = new Driver();
+		driver = driverService.findDriverIdByName(driverDetails.getName());
+		if(null != driver) {
+		Customer customer = new Customer();
+		customer = customerService.findDriverIdByName(customerDetails.getName());
+		//bookingDao.findByBookingId(customerId)
+		
+		Bookings booking = new Bookings();
+		if(null != customer) {
+		booking.setDriverId(driver);
+		booking.setCustomerId(customer);
+		booking.setStatus("In-Transit");
+		bookingDao.save(booking);
+		}
+		}
 	}
 
 	
