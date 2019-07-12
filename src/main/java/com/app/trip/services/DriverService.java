@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.trip.controllers.BookingController;
 import com.app.trip.dao.DriverDao;
 import com.app.trip.entities.Driver;
 import com.app.trip.pojos.DriverDetails;
@@ -17,6 +19,8 @@ public class DriverService {
 
 	@Autowired
 	private DriverDao driverDao;
+	
+	org.apache.logging.log4j.Logger logger = LogManager.getLogger(BookingController.class);
 	
 	public List<Driver> getAllDrivers(){
 
@@ -29,18 +33,21 @@ public class DriverService {
 	public List<DriverDetails> getAllAvailableDriverDetails(){
 		
 		List<Driver> drivers = getAvailableDrivers("Available");
+		if(null != drivers)
+			System.out.println("Drivers are: "+drivers);
 		List<DriverDetails> driverDetails = new ArrayList<>();
-		DriverDetails driverDetail = new DriverDetails();
+		
 		if(null != drivers)
 		for(Driver d: drivers) {
+			DriverDetails driverDetail = new DriverDetails();
 			if(null != d) {
 				driverDetail.setName(d.getDriverName());
 				driverDetail.setLocation(d.getLocation());
 				driverDetail.setLatitude(d.getLatitude());
 				driverDetail.setLongitude(d.getLongitude());
 				driverDetail.setStatus(d.getStatus());
-				driverDetails.add(driverDetail);
 			}
+			driverDetails.add(driverDetail);
 		}
 		return driverDetails;
 	}

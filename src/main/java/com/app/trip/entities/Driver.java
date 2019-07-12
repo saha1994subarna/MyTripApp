@@ -1,9 +1,14 @@
 package com.app.trip.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +38,8 @@ public class Driver {
 	
 	@Column(name = "status")
 	private String status;
+	
+	//private Set<Driver> bookingRecords = new HashSet<Driver>(0);
 
 	public Driver(Long driverId, String driverName, String location, Double latitude, Double longitude, String status) {
 		super();
@@ -92,6 +99,15 @@ public class Driver {
 		this.status = status;
 	}
 
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
+	public Set<Driver> getBookingRecords() {
+		return bookingRecords;
+	}
+
+	public void setBookingRecords(Set<Driver> bookingRecords) {
+		this.bookingRecords = bookingRecords;
+	}
+*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

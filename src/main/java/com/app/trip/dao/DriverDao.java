@@ -14,7 +14,7 @@ public interface DriverDao extends JpaRepository<Driver, Long> {
 	static final String GET_DRIVER_BY_STATUS = "select d.driver_id, d.driver_name, d.location, d.latitude, d.longitude from driver d"
 			+ " left join booking b on b.driver_id=d.driver_id where b.status=?";
 	
-		/* @PersistenceContext 
+	/*@PersistenceContext 
 	 EntityManager entityManager;*/
 	 
 

@@ -2,6 +2,7 @@ package com.app.trip.controllers;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,8 @@ public class NewDriverController {
 	@Autowired
 	private DriverService driverService;
 
+	org.apache.logging.log4j.Logger logger = LogManager.getLogger(BookingController.class);
+	
 	@PostMapping(path="/add")
 	public String addDriver(@RequestBody DriverDetails driverDetails) throws BookingBusinessException{
 

@@ -1,9 +1,11 @@
 package com.app.trip.services;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.trip.controllers.BookingController;
 import com.app.trip.dao.CustomerDao;
 import com.app.trip.entities.Customer;
 import com.app.trip.entities.Driver;
@@ -14,6 +16,8 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerDao customerDao;
+	
+	org.apache.logging.log4j.Logger logger = LogManager.getLogger(BookingController.class);
 	
 	@Transactional
 	public void saveCustomer(CustomerDetails customerDetails) {
